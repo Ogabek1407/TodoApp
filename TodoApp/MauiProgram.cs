@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
 using TodoApp.DataAccess;
+using TodoApp.ViewModel;
 
 namespace TodoApp
 {
@@ -17,7 +18,11 @@ namespace TodoApp
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
 
-            builder.Services.TryAddTransient<DataContext>();
+            builder.Services.AddTransient<DataContext>();
+
+            builder.Services.AddSingleton<MainPageViewModel>();
+
+            builder.Services.AddSingleton<MainPage>();
 
 #if DEBUG
             builder.Logging.AddDebug();
