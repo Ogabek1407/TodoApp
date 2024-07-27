@@ -7,9 +7,31 @@
     Shell.FlyoutBehavior="Disabled"
     Title="TodoApp">
 
-    <ShellContent
+    <!--<ShellContent
         Title="Home"
         ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+        Route="MainPage" />-->
+
+    <TabBar>
+
+        <ShellContent
+            Title="HomePage"
+            ContentTemplate="{DataTemplate local:HomePage}"
+            Route="HomePage"
+            Icon="home.png"/>
+
+        <ShellContent
+    Title="HomePage"
+    ContentTemplate="{DataTemplate local:HomePage}"
+    Route="HomePage"
+    Icon="home.png"/>
+
+        <ShellContent
+    Title="HomePage"
+    ContentTemplate="{DataTemplate local:ProfilePage}"
+    Route="HomePage"
+    Icon="user.png"/>
+
+    </TabBar>
 
 </Shell>
