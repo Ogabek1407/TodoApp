@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TodoApp.AddPage"
+             Title="AddPage">
+    <VerticalStackLayout>
+        <StackLayout Padding="20">
+            <Label Text="Entry Task Name:"   
+               FontSize="Medium"   
+               VerticalOptions="Center"   
+               HorizontalOptions="Center" />
+            <Entry x:Name="TextEntry"   
+                   Text="{Binding Text}"
+                    Placeholder="Matnni kiriting"   
+                    VerticalOptions="Center" />
+
+            <Label Text="Entry Date:"   
+                    FontSize="Medium"   
+                    VerticalOptions="Center"   
+                    HorizontalOptions="Center" />
+            
+            <DatePicker x:Name="datePicker"
+                        VerticalOptions="Center"
+                        MinimumDate="{Binding TodayDate}"
+                        Date="{Binding DueDateTask, Mode=TwoWay, FallbackValue={x:Null}, TargetNullValue={x:Null}}" />
+
+            <Button Text="Save"   
+                VerticalOptions="Center"   
+                Command="{Binding AddCommand}" />
+        </StackLayout>
+    </VerticalStackLayout>
+</ContentPage>

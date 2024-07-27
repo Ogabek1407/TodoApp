@@ -1,27 +1,31 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ViewModel="clr-namespace:TodoApp.ViewModel"
              x:Class="TodoApp.MainPage">
 
     <ScrollView>
         <StackLayout Padding="10">
+            <ImageButton Source="Add.png" Clicked="onAddTodoPageClicked" WidthRequest="30" HeightRequest="30" />
             <CollectionView ItemsSource="{Binding Values}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Frame Padding="10" Margin="5" BorderColor="Gray" CornerRadius="10">
-                            <StackLayout>
-                                <Label Text="{Binding Text}" FontSize="20" />
-                                <Label Text="{Binding CreateTime, StringFormat='Created: {0:yyyy-MM-dd HH:mm:ss}'}" FontSize="15" />
-                                <!--<Label Text="{Binding IsChecked, Converter={StaticResource BoolToStringConverter}}" FontSize="15" />-->
-                            </StackLayout>
+                        <Frame  Padding="10" HeightRequest="80" Margin="5"   CornerRadius="10"  BorderColor="Blue">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="80"/>
+                                </Grid.ColumnDefinitions>
+                                <StackLayout Grid.Column="0">
+                                    <Label Text="{Binding Text}" FontSize="20"  Margin="0,0,0,5"/>
+                                    <Label Text="{Binding CreateTime, StringFormat='Created: {0:yyyy-MM-dd}'}" FontSize="15"  Margin="0,0,0,5"/>
+                                </StackLayout>
+                                <ImageButton Grid.Column="1" HorizontalOptions="Center" Clicked="OnDeleteClicked" CommandParameter="{Binding}" Source="delete.pmg" WidthRequest="30" HeightRequest="30"/>
+                            </Grid>
                         </Frame>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-
-            <Button Text="Add Todo" Command="{Binding AddTodoCommand}" />
-            <Button Text="Edit Todo" Command="{Binding EditCommand}" />
-            <Button Text="Delete Todo" Command="{Binding DeleteCommand}" />
         </StackLayout>
     </ScrollView>
 

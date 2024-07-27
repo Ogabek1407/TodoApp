@@ -51,6 +51,16 @@ public class TodoViewModel : BaseViewModel
             OnPropertyChanged(nameof(FinishedTime));
         }
     }
+    private DateTime dueDateTime;
+    public DateTime DueDateTime
+    {
+        get => dueDateTime;
+        set
+        {
+            dueDateTime = value;
+            OnPropertyChanged(nameof(DueDateTime));
+        }
+    }
     private bool isCompleted;
     public bool IsChecked
     {

@@ -50,6 +50,7 @@ public class DataContext
     public async Task<int> DeleteTodo(TodoModel item)
     {
         await Init();
-        return await _database.DeleteAsync(item);
+        var result = await _database.DeleteAsync(item);
+        return result;
     }
 }

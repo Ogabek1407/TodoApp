@@ -5,11 +5,8 @@ using TodoApp.DataAccess.Models;
 
 namespace TodoApp.ViewModel;
 
-public class MainPageViewModel : BaseViewModel
+public class HomePageViewModel : BaseViewModel
 {
-
-
-
     private readonly DataContext _dataContext;
 
 
@@ -27,7 +24,7 @@ public class MainPageViewModel : BaseViewModel
 
 
 
-    public MainPageViewModel(DataContext dataContext)
+    public HomePageViewModel(DataContext dataContext)
     {
         this._dataContext = dataContext;
         ReloadTodo();
@@ -49,16 +46,16 @@ public class MainPageViewModel : BaseViewModel
 
 
 
-    public ICommand AddTodoCommand => new SimpleCommand(async () =>
+    public ICommand ReloadCommand => new SimpleCommand(async () =>
     {
-        
+        ReloadTodo();
     });
 
 
 
     public ICommand EditCommand => new SimpleCommand(async () =>
     {
-        
+
     });
 
 
@@ -70,16 +67,12 @@ public class MainPageViewModel : BaseViewModel
 
 
 
-    public ICommand DeleteCommand => new SimpleCommand(async () =>
+    public async Task DeleteTodo(TodoViewModel todo)
     {
-
-    });
-
-
-
-    public void DeleteTodo(TodoViewModel todo)
-    {
-
+        var model = ConvertTodoModel(todo);
+        var result = await _dataContext.DeleteTodo(model);
+        
+        ReloadTodo();
     }
 
 
@@ -91,6 +84,7 @@ public class MainPageViewModel : BaseViewModel
             CreatedTime = data.CreateTime,
             FinishedTime = data.FinishedTime,
             IsChecked = data.IsChecked,
+            DueDateTime = data.DueDateTime,
             Text = data.Text,
             TodoId = data.TodoId,
             UpdatedTime = data.UpdateTime
@@ -107,6 +101,7 @@ public class MainPageViewModel : BaseViewModel
             FinishedTime = data.FinishedTime,
             IsChecked = data.IsChecked,
             UpdateTime = data.UpdatedTime,
+            DueDateTime = data.DueDateTime,
             TodoId = data.TodoId,
             Text = data.Text,
         };
