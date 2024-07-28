@@ -72,7 +72,7 @@ public class AddPageViewModel : BaseViewModel
         Text = string.Empty;
         DueDateTask = DateTime.Now;
         await _dataContext.Save(todo);
-        //await Shell.Current.GoToAsync(nameof(HomePage));
+        await Shell.Current.GoToAsync("//HomePage");
     });
 
 

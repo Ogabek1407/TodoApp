@@ -4,7 +4,7 @@ namespace TodoApp.DataAccess;
 
 public class Constants
 {
-    public const string DatabaseFilename = "ItemSQLite1.db3";
+    public const string DatabaseFilename = "TodoSQLite.db3";
 
     public const SQLite.SQLiteOpenFlags Flags =
         SQLite.SQLiteOpenFlags.ReadWrite |

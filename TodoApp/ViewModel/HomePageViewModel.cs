@@ -26,7 +26,7 @@ public class HomePageViewModel : BaseViewModel
 
     public HomePageViewModel(DataContext dataContext)
     {
-        this._dataContext = dataContext;
+        _dataContext = dataContext;
         ReloadTodo();
     }
 
@@ -39,8 +39,11 @@ public class HomePageViewModel : BaseViewModel
         var models = await data.ToListAsync();
         foreach (var model in models)
         {
-            var item = ConvertViewModel(model);
-            Values.Add(item);
+            if (!model.IsChecked)
+            {
+                var item = ConvertViewModel(model);
+                Values.Add(item);
+            }
         }
     }
 
@@ -53,17 +56,14 @@ public class HomePageViewModel : BaseViewModel
 
 
 
-    public ICommand EditCommand => new SimpleCommand(async () =>
+    public async void OnChecked(TodoViewModel todo)
     {
-
-    });
-
-
-
-    public ICommand IsCheckEdCommand => new SimpleCommand(async () =>
-    {
-
-    });
+        todo.IsChecked = true;
+        todo.FinishedTime = DateTime.Now;
+        var model = ConvertTodoModel(todo);
+        await _dataContext.Save(model);
+        ReloadTodo();
+    }
 
 
 
@@ -71,8 +71,15 @@ public class HomePageViewModel : BaseViewModel
     {
         var model = ConvertTodoModel(todo);
         var result = await _dataContext.DeleteTodo(model);
-        
         ReloadTodo();
+    }
+
+
+
+    private async Task PlayCompletionSound()
+    {
+        //var player = _audioManager.CreatePlayer(await FileSystem.OpenAppPackageFileAsync("complete_task.wav"));
+        //player.Play();
     }
 
 

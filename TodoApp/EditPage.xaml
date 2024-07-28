@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TodoApp.EditPage"
+             Title="EditPage">
+    <StackLayout Margin="20">
+        <Label 
+                Text="Entry Task Name:"   
+                FontSize="Medium"   
+                VerticalOptions="Center"   
+                HorizontalOptions="Start" />
+        <Entry   
+                Text="{Binding Todo.Text}"
+                Placeholder="Matnni kiriting"   
+                VerticalOptions="Center" />
+
+        <Label 
+                Text="{Binding Todo.DueDateTime, StringFormat='DueDate: {0:yyyy-MM-dd}'}" FontSize="15"  Margin="0,0,0,5"  
+                VerticalOptions="Center"   
+                HorizontalOptions="Start" />
+
+        <DatePicker 
+                x:Name="datePicker"
+                VerticalOptions="Center"
+                MinimumDate="{Binding TodayDate}"
+                Date="{Binding Todo.DueDateTime, Mode=TwoWay, FallbackValue={x:Null}, TargetNullValue={x:Null}}" />
+
+
+
+        <Button Text="Save" Command="{Binding UpdateCommand}" Margin="0,20,0,0"/>
+
+        <Label x:Name="OutputLabel" FontSize="16" Margin="0,20,0,0"/>
+
+        <Label x:Name="PreviousOutputLabel" FontSize="14" TextColor="Gray" Margin="0,10,0,0"/>
+    </StackLayout>
+</ContentPage>
