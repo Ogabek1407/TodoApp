@@ -24,9 +24,10 @@ public partial class HomePage : ContentPage
     {
         var checkBox = sender as CheckBox;
         var todo = checkBox?.BindingContext as TodoViewModel;
+        bool? data = checkBox?.IsChecked;
         if (todo != null)
         {
-            viewModel.OnChecked(todo);
+            viewModel.OnChecked(todo, data);
         }
     }
 
@@ -52,6 +53,17 @@ public partial class HomePage : ContentPage
         var data = new DataContext();
         viewModel = new HomePageViewModel(data);
         BindingContext = viewModel;
+    }
+
+
+
+    public bool CheckDate(DateTime date)
+    {
+        if (date < DateTime.Now)
+        {
+            return false;
+        }
+        return true;
     }
 
 

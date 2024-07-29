@@ -3,10 +3,31 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TodoApp.ProfilePage"
              Title="ProfilePage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <ScrollView>
+        <CollectionView ItemsSource="{Binding Values}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame  Padding="10" HeightRequest="100" Margin="5"   CornerRadius="10"  BorderColor="Blue">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnFrameTapped"  CommandParameter="{Binding .}"/>
+                        </Frame.GestureRecognizers>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="80"/>
+                            </Grid.ColumnDefinitions>
+                            <CheckBox Grid.Column="0" IsChecked="True" CheckedChanged="OnCheckBoxCheckedChanged"  HorizontalOptions="StartAndExpand" VerticalOptions="Center" />
+                            <StackLayout Grid.Column="1">
+                                <Label Text="{Binding Text}" FontSize="20"  Margin="0,0,0,5"/>
+                                <Label Text="{Binding CreateTime, StringFormat='Created: {0:yyyy-MM-dd}'}" FontSize="15"  Margin="0,0,0,5"/>
+                                <Label Text="{Binding FinishedTime, StringFormat='Finished: {0:yyyy-MM-dd}'}" FontSize="15"  Margin="0,0,0,5"/>
+                            </StackLayout>
+                            <ImageButton Grid.Column="2" HorizontalOptions="Center" Clicked="OnDeleteClicked" CommandParameter="{Binding}" Source="delete.pmg" WidthRequest="30" HeightRequest="30"/>
+                        </Grid>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </ScrollView>
 </ContentPage>

@@ -7,10 +7,9 @@
         <CollectionView ItemsSource="{Binding Values}">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Frame  Padding="10" HeightRequest="100" Margin="5"   CornerRadius="10"  BorderColor="Blue">
+                    <Frame Padding="10" HeightRequest="100" Margin="5" CornerRadius="10" BorderColor="Blue">
                         <Frame.GestureRecognizers>
-
-                            <TapGestureRecognizer Tapped="OnFrameTapped"  CommandParameter="{Binding .}" Command="{Binding TapCommand}"/>
+                            <TapGestureRecognizer Tapped="OnFrameTapped" CommandParameter="{Binding .}"/>
                         </Frame.GestureRecognizers>
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -18,17 +17,18 @@
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="80"/>
                             </Grid.ColumnDefinitions>
-                            <CheckBox Grid.Column="0" CheckedChanged="OnCheckBoxCheckedChanged"  HorizontalOptions="StartAndExpand" VerticalOptions="Center" />
-                            <StackLayout Grid.Column="1">
-                                <Label Text="{Binding Text}" FontSize="20"  Margin="0,0,0,5">
-                                    <Label.GestureRecognizers>
-                                        <TapGestureRecognizer Command="{Binding TapCommand}" CommandParameter="{Binding .}"/>
-                                    </Label.GestureRecognizers>
-                                </Label>
-                                <Label Text="{Binding CreateTime, StringFormat='Created: {0:yyyy-MM-dd}'}" FontSize="15"  Margin="0,0,0,5"/>
-                                <Label Text="{Binding DueDateTime, StringFormat='DueDate: {0:yyyy-MM-dd}'}" FontSize="15"  Margin="0,0,0,5"/>
-                            </StackLayout>
-                            <ImageButton Grid.Column="2" HorizontalOptions="Center" Clicked="OnDeleteClicked" CommandParameter="{Binding}" Source="delete.pmg" WidthRequest="30" HeightRequest="30"/>
+                            <CheckBox Grid.Column="0" CheckedChanged="OnCheckBoxCheckedChanged" HorizontalOptions="StartAndExpand" VerticalOptions="Center"/>
+                            <Grid Grid.Column="1">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Label Text="{Binding Text}" FontSize="20" Margin="0,0,0,5" Grid.Row="0"/>
+                                <Label Text="{Binding CreateTime, StringFormat='Created: {0:yyyy-MM-dd}'}" FontSize="15" Margin="0,0,0,5" Grid.Row="1"/>
+                                <Label Text="{Binding DueDateTime, StringFormat='Due: {0:yyyy-MM-dd}'}" FontSize="15" Margin="0,0,0,5" Grid.Row="2"/>
+                            </Grid>
+                            <ImageButton Grid.Column="2" HorizontalOptions="Center" Clicked="OnDeleteClicked" CommandParameter="{Binding}" Source="delete.png" WidthRequest="30" HeightRequest="30"/>
                         </Grid>
                     </Frame>
                 </DataTemplate>

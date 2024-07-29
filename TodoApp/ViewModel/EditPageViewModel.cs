@@ -37,7 +37,7 @@ public class EditPageViewModel : BaseViewModel
 
 
 
-    public ICommand UpdateCommand => new SimpleCommand(async () =>
+    public async void Save()
     {
         if (string.IsNullOrWhiteSpace(Todo.Text))
         {
@@ -50,8 +50,7 @@ public class EditPageViewModel : BaseViewModel
         Todo.UpdateTime = DateTime.Now;
         var model = ConvertTodoModel(Todo);
         await _dataContext.Save(model);
-        await Shell.Current.GoToAsync("//HomePage");
-    });
+    }
 
 
 

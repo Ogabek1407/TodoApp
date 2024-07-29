@@ -24,6 +24,7 @@ public class HomePageViewModel : BaseViewModel
 
 
 
+
     public HomePageViewModel(DataContext dataContext)
     {
         _dataContext = dataContext;
@@ -49,16 +50,20 @@ public class HomePageViewModel : BaseViewModel
 
 
 
-    public ICommand ReloadCommand => new SimpleCommand(async () =>
+    public bool CheckDate(DateTime date)
     {
-        ReloadTodo();
-    });
+        if (date < DateTime.Now)
+        {
+            return false;
+        }
+        return true;
+    }
 
 
 
-    public async void OnChecked(TodoViewModel todo)
+    public async void OnChecked(TodoViewModel todo, bool? data)
     {
-        todo.IsChecked = true;
+        todo.IsChecked = data ??= todo.IsChecked;
         todo.FinishedTime = DateTime.Now;
         var model = ConvertTodoModel(todo);
         await _dataContext.Save(model);
@@ -76,11 +81,11 @@ public class HomePageViewModel : BaseViewModel
 
 
 
-    private async Task PlayCompletionSound()
-    {
-        //var player = _audioManager.CreatePlayer(await FileSystem.OpenAppPackageFileAsync("complete_task.wav"));
-        //player.Play();
-    }
+    //private async Task PlayCompletionSound()
+    //{
+    //    var player = _audioManager.CreatePlayer(await FileSystem.OpenAppPackageFileAsync("complete_task.wav"));
+    //    player.Play();
+    //}
 
 
 

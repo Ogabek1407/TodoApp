@@ -26,8 +26,8 @@
                 Date="{Binding Todo.DueDateTime, Mode=TwoWay, FallbackValue={x:Null}, TargetNullValue={x:Null}}" />
 
 
-
-        <Button Text="Save" Command="{Binding UpdateCommand}" Margin="0,20,0,0"/>
+        <!--Command="{Binding UpdateCommand}"-->
+        <Button Text="Save" Clicked="SaveClicked" Margin="0,20,0,0"/>
 
         <Label x:Name="OutputLabel" FontSize="16" Margin="0,20,0,0"/>
 

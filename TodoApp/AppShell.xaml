@@ -8,23 +8,29 @@
     Title="TodoApp">
 
 
-    <TabBar>
+    <FlyoutItem>
         <ShellContent  
+            Title="Home"
             Icon="home.png"
+            ContentTemplate="{DataTemplate local:HomePage}" 
             Route="HomePage"
-            Title="Home"  
-            ContentTemplate="{DataTemplate local:HomePage}" />
+            />
+        
         <ShellContent  
-            Route="AddPage"
+            Title="Home" 
             Icon="add.png"
-            Title="Add"  
-            ContentTemplate="{DataTemplate local:AddPage}" />
+            ContentTemplate="{DataTemplate local:AddPage}"
+            FlyoutItemIsVisible="False"
+            Route="AddPage"
+            />
+        
         <ShellContent  
-            Title="ProfilePage" 
-            Route="Profile.png"
+            Title="Profile" 
             Icon="user.png"
-            ContentTemplate="{DataTemplate local:ProfilePage}" />
-    </TabBar>
+            ContentTemplate="{DataTemplate local:ProfilePage}" 
+            FlyoutItemIsVisible="False"
+            Route="Profile.png" />
+    </FlyoutItem>
 
 
 </Shell>
