@@ -11,6 +11,10 @@ public class HomePageViewModel : BaseViewModel
 
 
 
+    public long ValuesCount => Values.Count;
+
+
+
     private ObservableCollection<TodoViewModel> values;
     public ObservableCollection<TodoViewModel> Values
     {
@@ -19,6 +23,23 @@ public class HomePageViewModel : BaseViewModel
         {
             values = value;
             OnPropertyChanged(nameof(Values));
+        }
+    }
+
+
+
+    public long Values2Count => Values2.Count;
+
+
+
+    private ObservableCollection<TodoViewModel> values2;
+    public ObservableCollection<TodoViewModel> Values2
+    {
+        get => values2 ??= new ObservableCollection<TodoViewModel>();
+        set
+        {
+            values2 = value;
+            OnPropertyChanged(nameof(Values2));
         }
     }
 
@@ -36,15 +57,20 @@ public class HomePageViewModel : BaseViewModel
     public async void ReloadTodo()
     {
         Values.Clear();
+        Values2.Clear();
         var data = await _dataContext.GetAll();
         var models = await data.ToListAsync();
         foreach (var model in models)
         {
-            if (!model.IsChecked)
-            {
-                var item = ConvertViewModel(model);
-                Values.Add(item);
-            }
+            //if (!model.IsChecked)
+            //{
+            var item = ConvertViewModel(model);
+            Values.Add(item);
+            //}
+            //else
+            //{
+            //    Values2.Add(ConvertViewModel(model));
+            //}
         }
     }
 
@@ -63,8 +89,19 @@ public class HomePageViewModel : BaseViewModel
 
     public async void OnChecked(TodoViewModel todo, bool? data)
     {
-        todo.IsChecked = data ??= todo.IsChecked;
+        todo.IsChecked = data ??= !todo.IsChecked;
         todo.FinishedTime = DateTime.Now;
+        var model = ConvertTodoModel(todo);
+        await _dataContext.Save(model);
+        return;
+    }
+
+
+
+    public async void OnChecked2(TodoViewModel todo, bool? data)
+    {
+        todo.IsChecked = data ??= todo.IsChecked;
+        todo.FinishedTime = default;
         var model = ConvertTodoModel(todo);
         await _dataContext.Save(model);
         ReloadTodo();

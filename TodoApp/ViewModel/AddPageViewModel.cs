@@ -57,6 +57,7 @@ public class AddPageViewModel : BaseViewModel
     {
         if (string.IsNullOrWhiteSpace(Text))
         {
+            await Shell.Current.DisplayAlert("Error", "Enter Task Name: ", "Ok");
             return;
         }
         if (DueDateTask < DateTime.Today)

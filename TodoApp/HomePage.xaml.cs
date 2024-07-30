@@ -24,10 +24,23 @@ public partial class HomePage : ContentPage
     {
         var checkBox = sender as CheckBox;
         var todo = checkBox?.BindingContext as TodoViewModel;
-        bool? data = checkBox?.IsChecked;
+        var data = checkBox?.IsChecked;
         if (todo != null)
         {
             viewModel.OnChecked(todo, data);
+        }
+    }
+
+
+
+    public void OnCheckBoxChecked2Changed(object sender, EventArgs e)
+    {
+        var checkBox = sender as CheckBox;
+        var todo = checkBox?.BindingContext as TodoViewModel;
+        var data = checkBox?.IsChecked;
+        if (todo != null && data == false)
+        {
+            viewModel.OnChecked2(todo, data);
         }
     }
 

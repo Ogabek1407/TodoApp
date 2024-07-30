@@ -5,8 +5,14 @@
              x:Class="TodoApp.MainPage">
 
     <ScrollView>
+        
         <StackLayout Padding="10">
+            
+            
+
             <ImageButton Source="Add.png" Clicked="onAddTodoPageClicked" WidthRequest="30" HeightRequest="30" />
+
+
             <CollectionView ItemsSource="{Binding Values}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>

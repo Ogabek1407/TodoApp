@@ -10,14 +10,14 @@ public class ProfilePageViewModel : BaseViewModel
 
 
 
-    private ObservableCollection<TodoViewModel> values;
-    public ObservableCollection<TodoViewModel> Values
+    private ObservableCollection<TodoViewModel> values2;
+    public ObservableCollection<TodoViewModel> Values2
     {
-        get => values ??= new ObservableCollection<TodoViewModel>();
+        get => values2 ??= new ObservableCollection<TodoViewModel>();
         set
         {
-            values = value;
-            OnPropertyChanged(nameof(Values));
+            values2 = value;
+            OnPropertyChanged(nameof(Values2));
         }
     }
 
@@ -31,7 +31,7 @@ public class ProfilePageViewModel : BaseViewModel
 
 
 
-    public async void OnChecked(TodoViewModel todo, bool? data)
+    public async void OnChecked2(TodoViewModel todo, bool? data)
     {
         todo.IsChecked = data ??= todo.IsChecked;
         todo.FinishedTime = default;
@@ -46,13 +46,13 @@ public class ProfilePageViewModel : BaseViewModel
     {
         var data = await _dataContext.GetAll();
         var models = await data.ToListAsync();
-        values.Clear();
+        values2.Clear();
         foreach (var model in models)
         {
             if (model.IsChecked)
             {
                 var item = ConvertViewModel(model);
-                Values.Add(item);
+                Values2.Add(item);
             }
         }
     }

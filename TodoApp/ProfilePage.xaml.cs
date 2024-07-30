@@ -39,14 +39,14 @@ public partial class ProfilePage : ContentPage
 
 
 
-    public void OnCheckBoxCheckedChanged(object sender, EventArgs e)
+    public void OnCheckBoxChecked2Changed(object sender, EventArgs e)
     {
         var checkBox = sender as CheckBox;
         var todo = checkBox?.BindingContext as TodoViewModel;
         var data = checkBox?.IsChecked;
-        if (todo != null)
+        if (todo != null && data == false)
         {
-            viewModel.OnChecked(todo,data);
+            viewModel.OnChecked2(todo, data);
         }
     }
 

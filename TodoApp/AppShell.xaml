@@ -5,32 +5,33 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:TodoApp"
     Shell.FlyoutBehavior="Disabled"
-    Title="TodoApp">
-
+    Title="TodoApp"
+    Shell.TabBarTitleColor="#0000F6"
+    Shell.TabBarUnselectedColor="Black"
+    Shell.TabBarDisabledColor="#0000F6"
+    Shell.TabBarForegroundColor="#0000F6"
+    >
 
     <FlyoutItem>
-        <ShellContent  
+        <ShellContent
             Title="Home"
             Icon="home.png"
-            ContentTemplate="{DataTemplate local:HomePage}" 
-            Route="HomePage"
-            />
-        
-        <ShellContent  
-            Title="Home" 
+            ContentTemplate="{DataTemplate local:HomePage}"
+            Route="HomePage" />
+
+        <ShellContent
+            Title="Add"
             Icon="add.png"
             ContentTemplate="{DataTemplate local:AddPage}"
             FlyoutItemIsVisible="False"
-            Route="AddPage"
-            />
-        
-        <ShellContent  
-            Title="Profile" 
-            Icon="user.png"
-            ContentTemplate="{DataTemplate local:ProfilePage}" 
-            FlyoutItemIsVisible="False"
-            Route="Profile.png" />
-    </FlyoutItem>
+            Route="AddPage" />
 
+        <ShellContent
+            Title="Complete"
+            Icon="checked.png"
+            ContentTemplate="{DataTemplate local:ProfilePage}"
+            FlyoutItemIsVisible="False"
+            Route="ProfilePage" />
+    </FlyoutItem>
 
 </Shell>

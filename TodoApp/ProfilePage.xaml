@@ -2,12 +2,12 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TodoApp.ProfilePage"
-             Title="ProfilePage">
+             Title="Completed Tasks">
     <ScrollView>
-        <CollectionView ItemsSource="{Binding Values}">
+        <CollectionView ItemsSource="{Binding Values2}">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Frame  Padding="10" HeightRequest="100" Margin="5"   CornerRadius="10"  BorderColor="Blue">
+                    <Frame  Padding="10" HeightRequest="75" Margin="5"   CornerRadius="10" BackgroundColor="#f1f1f1" >
                         <Frame.GestureRecognizers>
                             <TapGestureRecognizer Tapped="OnFrameTapped"  CommandParameter="{Binding .}"/>
                         </Frame.GestureRecognizers>
@@ -15,15 +15,24 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="50"/>
                                 <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="80"/>
+                                <ColumnDefinition Width="50"/>
                             </Grid.ColumnDefinitions>
-                            <CheckBox Grid.Column="0" IsChecked="True" CheckedChanged="OnCheckBoxCheckedChanged"  HorizontalOptions="StartAndExpand" VerticalOptions="Center" />
+                            <CheckBox Grid.Column="0" IsChecked="{Binding IsChecked}" CheckedChanged="OnCheckBoxChecked2Changed"  HorizontalOptions="StartAndExpand" VerticalOptions="Center" />
                             <StackLayout Grid.Column="1">
                                 <Label Text="{Binding Text}" FontSize="20"  Margin="0,0,0,5"/>
-                                <Label Text="{Binding CreateTime, StringFormat='Created: {0:yyyy-MM-dd}'}" FontSize="15"  Margin="0,0,0,5"/>
-                                <Label Text="{Binding FinishedTime, StringFormat='Finished: {0:yyyy-MM-dd}'}" FontSize="15"  Margin="0,0,0,5"/>
+                                <HorizontalStackLayout>
+                                    <Image 
+                                            Source="calendar.png" 
+                                            WidthRequest="15"
+                                            HeightRequest="15"
+                                            Margin="0,0,0,0" />
+                                    <Label 
+                                            Text="{Binding FinishedTime, StringFormat='Finished Date: {0:yyyy-MM-dd}'}"
+                                            FontSize="15"  
+                                            Margin="7,0,0,5" />
+                                </HorizontalStackLayout>
                             </StackLayout>
-                            <ImageButton Grid.Column="2" HorizontalOptions="Center" Clicked="OnDeleteClicked" CommandParameter="{Binding}" Source="delete.pmg" WidthRequest="30" HeightRequest="30"/>
+                            <ImageButton Grid.Column="2" HorizontalOptions="Center" Clicked="OnDeleteClicked" CommandParameter="{Binding}" Source="trash.pmg" WidthRequest="30" HeightRequest="30"/>
                         </Grid>
                     </Frame>
                 </DataTemplate>
