@@ -19,8 +19,11 @@ public partial class EditPage : ContentPage
 
     public async void SaveClicked(object sender, EventArgs e)
     {
-        viewModel.Save();
-        HomePage.isVisible = true;
-        await Navigation.PopAsync();
+        var isVisible = await viewModel.Save();
+        if (isVisible)
+        {
+            HomePage.isVisible = true;
+            await Navigation.PopAsync();
+        }
     }
 }

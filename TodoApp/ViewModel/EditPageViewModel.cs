@@ -26,10 +26,6 @@ public partial class EditPageViewModel : ObservableObject
 
 
 
-    public DateTime TodayDate => DateTime.Today;
-
-
-
     public EditPageViewModel(DataContext dataContext)
     {
         _dataContext = dataContext;
@@ -37,19 +33,16 @@ public partial class EditPageViewModel : ObservableObject
 
 
 
-    public async void Save()
+    public async Task<bool> Save()
     {
         if (string.IsNullOrWhiteSpace(Todo.Text))
         {
-            return;
-        }
-        if (Todo.DueDateTime < DateTime.Today)
-        {
-            return;
+            return false;
         }
         Todo.UpdateTime = DateTime.Now;
         var model = ConvertTodoModel(Todo);
         await _dataContext.Save(model);
+        return true;
     }
 
 
