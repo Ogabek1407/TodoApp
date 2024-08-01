@@ -20,29 +20,29 @@ public partial class HomePage : ContentPage
 
 
 
-    public void OnCheckBoxCheckedChanged(object sender, EventArgs e)
-    {
-        var checkBox = sender as CheckBox;
-        var todo = checkBox?.BindingContext as TodoViewModel;
-        var data = checkBox?.IsChecked;
-        if (todo != null)
-        {
-            viewModel.OnChecked(todo, data);
-        }
-    }
+    //public void OnCheckBoxCheckedChanged(object sender, EventArgs e)
+    //{
+    //    var checkBox = sender as CheckBox;
+    //    var todo = checkBox?.BindingContext as TodoViewModel;
+    //    var data = checkBox?.IsChecked;
+    //    if (todo != null)
+    //    {
+    //        viewModel.OnChecked(todo, data);
+    //    }
+    //}
 
 
 
-    public void OnCheckBoxChecked2Changed(object sender, EventArgs e)
-    {
-        var checkBox = sender as CheckBox;
-        var todo = checkBox?.BindingContext as TodoViewModel;
-        var data = checkBox?.IsChecked;
-        if (todo != null && data == false)
-        {
-            viewModel.OnChecked2(todo, data);
-        }
-    }
+    //public void OnCheckBoxChecked2Changed(object sender, EventArgs e)
+    //{
+    //    var checkBox = sender as CheckBox;
+    //    var todo = checkBox?.BindingContext as TodoViewModel;
+    //    var data = checkBox?.IsChecked;
+    //    if (todo != null && data == false)
+    //    {
+    //        viewModel.OnChecked2(todo, data);
+    //    }
+    //}
 
 
 
@@ -81,14 +81,14 @@ public partial class HomePage : ContentPage
 
 
 
-    private async void OnDeleteClicked(object sender, EventArgs e)
-    {
-        var button = sender as ImageButton;
-        var item = button.CommandParameter as TodoViewModel;
+    //private async void OnDeleteClicked(object sender, EventArgs e)
+    //{
+    //    var button = sender as ImageButton;
+    //    var item = button.CommandParameter as TodoViewModel;
 
-        if (item != null)
-        {
-            await viewModel.DeleteTodo(item);
-        }
-    }
+    //    if (item != null)
+    //    {
+    //        await viewModel.DeleteTodo(item);
+    //    }
+    //}
 }

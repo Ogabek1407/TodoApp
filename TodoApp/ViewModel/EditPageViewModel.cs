@@ -1,10 +1,10 @@
-﻿using System.Windows.Input;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using TodoApp.DataAccess;
 using TodoApp.DataAccess.Models;
 
 namespace TodoApp.ViewModel;
 
-public class EditPageViewModel : BaseViewModel
+public partial class EditPageViewModel : ObservableObject
 {
 
 
@@ -59,7 +59,7 @@ public class EditPageViewModel : BaseViewModel
         return new TodoModel()
         {
             CreatedTime = data.CreateTime,
-            FinishedTime = data.FinishedTime,
+            FinishedTime = (DateTime)data.FinishedTime,
             IsChecked = data.IsChecked,
             Text = data.Text,
             DueDateTime = data.DueDateTime,

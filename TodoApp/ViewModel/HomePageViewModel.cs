@@ -1,45 +1,42 @@
-﻿using System.Collections.ObjectModel;
-using System.Windows.Input;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using System.Collections.ObjectModel;
 using TodoApp.DataAccess;
 using TodoApp.DataAccess.Models;
 
 namespace TodoApp.ViewModel;
 
-public class HomePageViewModel : BaseViewModel
+public partial class HomePageViewModel : ObservableObject
 {
     private readonly DataContext _dataContext;
 
 
 
-    public long ValuesCount => Values.Count;
-
-
-
-    private ObservableCollection<TodoViewModel> values;
-    public ObservableCollection<TodoViewModel> Values
+    private ObservableCollection<TodoViewModel> openToDo;
+    public ObservableCollection<TodoViewModel> OpenToDo
     {
-        get => values ??= new ObservableCollection<TodoViewModel>();
+        get => openToDo ??= new ObservableCollection<TodoViewModel>();
         set
         {
-            values = value;
-            OnPropertyChanged(nameof(Values));
+            openToDo = value;
+            OnPropertyChanged(nameof(OpenToDo));
         }
     }
 
 
 
-    public long Values2Count => Values2.Count;
+    public long Values2Count => CompletedToDo.Count;
 
 
 
-    private ObservableCollection<TodoViewModel> values2;
-    public ObservableCollection<TodoViewModel> Values2
+    private ObservableCollection<TodoViewModel> completedToDo;
+    public ObservableCollection<TodoViewModel> CompletedToDo
     {
-        get => values2 ??= new ObservableCollection<TodoViewModel>();
+        get => completedToDo ??= new ObservableCollection<TodoViewModel>();
         set
         {
-            values2 = value;
-            OnPropertyChanged(nameof(Values2));
+            completedToDo = value;
+            OnPropertyChanged(nameof(CompletedToDo));
         }
     }
 
@@ -56,73 +53,45 @@ public class HomePageViewModel : BaseViewModel
 
     public async void ReloadTodo()
     {
-        Values.Clear();
-        Values2.Clear();
+        OpenToDo.Clear();
+        CompletedToDo.Clear();
         var data = await _dataContext.GetAll();
         var models = await data.ToListAsync();
         foreach (var model in models)
         {
-            //if (!model.IsChecked)
-            //{
             var item = ConvertViewModel(model);
-            Values.Add(item);
-            //}
-            //else
-            //{
-            //    Values2.Add(ConvertViewModel(model));
-            //}
+            OpenToDo.Add(item);
         }
     }
 
 
 
-    public bool CheckDate(DateTime date)
+    [RelayCommand]
+    public async Task Checked(TodoViewModel todo)
     {
-        if (date < DateTime.Now)
+        if (todo.IsChecked)
         {
-            return false;
+            todo.IsChecked = false;
+            todo.FinishedTime = default;
         }
-        return true;
-    }
-
-
-
-    public async void OnChecked(TodoViewModel todo, bool? data)
-    {
-        todo.IsChecked = data ??= !todo.IsChecked;
-        todo.FinishedTime = DateTime.Now;
+        else
+        {
+            todo.IsChecked = true;
+            todo.FinishedTime = DateTime.Now;
+        }
         var model = ConvertTodoModel(todo);
         await _dataContext.Save(model);
-        return;
     }
 
 
 
-    public async void OnChecked2(TodoViewModel todo, bool? data)
-    {
-        todo.IsChecked = data ??= todo.IsChecked;
-        todo.FinishedTime = default;
-        var model = ConvertTodoModel(todo);
-        await _dataContext.Save(model);
-        ReloadTodo();
-    }
-
-
-
-    public async Task DeleteTodo(TodoViewModel todo)
+    [RelayCommand]
+    public async Task Delete(TodoViewModel todo)
     {
         var model = ConvertTodoModel(todo);
         var result = await _dataContext.DeleteTodo(model);
         ReloadTodo();
     }
-
-
-
-    //private async Task PlayCompletionSound()
-    //{
-    //    var player = _audioManager.CreatePlayer(await FileSystem.OpenAppPackageFileAsync("complete_task.wav"));
-    //    player.Play();
-    //}
 
 
 

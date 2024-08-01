@@ -1,10 +1,11 @@
-﻿using System.Collections.ObjectModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using System.Collections.ObjectModel;
 using TodoApp.DataAccess;
 using TodoApp.DataAccess.Models;
 
 namespace TodoApp.ViewModel;
 
-public class ProfilePageViewModel : BaseViewModel
+public partial class ProfilePageViewModel : ObservableObject
 {
     private readonly DataContext _dataContext;
 
@@ -89,7 +90,7 @@ public class ProfilePageViewModel : BaseViewModel
         return new TodoModel()
         {
             CreatedTime = data.CreateTime,
-            FinishedTime = data.FinishedTime,
+            FinishedTime = (DateTime)data.FinishedTime,
             IsChecked = data.IsChecked,
             DueDateTime = data.DueDateTime,
             Text = data.Text,

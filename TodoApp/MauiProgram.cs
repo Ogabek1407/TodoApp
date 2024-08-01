@@ -21,7 +21,6 @@ namespace TodoApp
 
             builder.Services.AddSingleton<DataContext>();
 
-            builder.Services.AddTransient<MainPageViewModel>();
             builder.Services.AddTransient<HomePageViewModel>();
             builder.Services.AddTransient<AddPageViewModel>();
             builder.Services.AddTransient<ProfilePageViewModel>();

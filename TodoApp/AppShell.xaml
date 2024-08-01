@@ -26,12 +26,12 @@
             FlyoutItemIsVisible="False"
             Route="AddPage" />
 
-        <ShellContent
+        <!--<ShellContent
             Title="Complete"
             Icon="checked.png"
             ContentTemplate="{DataTemplate local:ProfilePage}"
             FlyoutItemIsVisible="False"
-            Route="ProfilePage" />
+            Route="ProfilePage" />-->
     </FlyoutItem>
 
 </Shell>

@@ -1,6 +1,8 @@
-﻿namespace TodoApp.ViewModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 
-public class TodoViewModel : BaseViewModel
+namespace TodoApp.ViewModel;
+
+public partial class TodoViewModel : ObservableObject
 {
     private long todoId;
     public long TodoId
