@@ -40,16 +40,11 @@ public partial class AddPageViewModel : ObservableObject
 
 
 
-    public DateTime TodayDate
-    {
-        get => DateTime.Now;
-    }
-
-
-
     public AddPageViewModel(DataContext dataContext)
     {
         _dataContext = dataContext;
+        Text = string.Empty;
+        DueDateTask = DateTime.Now;
     }
 
 
@@ -59,10 +54,6 @@ public partial class AddPageViewModel : ObservableObject
         if (string.IsNullOrWhiteSpace(Text))
         {
             await Shell.Current.DisplayAlert("Error", "Enter Task Name: ", "Ok");
-            return;
-        }
-        if (DueDateTask < DateTime.Today)
-        {
             return;
         }
         var todo = new TodoModel()

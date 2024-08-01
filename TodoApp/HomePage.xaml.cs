@@ -6,7 +6,7 @@ namespace TodoApp;
 public partial class HomePage : ContentPage
 {
 
-
+    public static bool isVisible = true;
 
     private HomePageViewModel viewModel;
 
@@ -52,8 +52,10 @@ public partial class HomePage : ContentPage
         var frame = sender as Frame;
 
         var todo = frame?.BindingContext as TodoViewModel;
-        if (todo != null)
+
+        if (todo != null && isVisible)
         {
+            isVisible = false;
             await Navigation.PushAsync(new EditPage(todo));
         }
     }
