@@ -5,12 +5,22 @@ namespace TodoApp;
 
 public partial class HomePage : ContentPage
 {
+    private bool _isVisible = true;
 
-    public static bool isVisible = true;
+    public bool isVisible
+    {
+        get => _isVisible;
+        set
+        {
+            _isVisible = value;
+            if (!_isVisible)
+            {
+                IsVisible();
+            }
+        }
+    }
 
     private HomePageViewModel viewModel;
-
-
 
     public HomePage(HomePageViewModel viewModel)
     {
@@ -18,39 +28,9 @@ public partial class HomePage : ContentPage
         BindingContext = viewModel;
     }
 
-
-
-    //public void OnCheckBoxCheckedChanged(object sender, EventArgs e)
-    //{
-    //    var checkBox = sender as CheckBox;
-    //    var todo = checkBox?.BindingContext as TodoViewModel;
-    //    var data = checkBox?.IsChecked;
-    //    if (todo != null)
-    //    {
-    //        viewModel.OnChecked(todo, data);
-    //    }
-    //}
-
-
-
-    //public void OnCheckBoxChecked2Changed(object sender, EventArgs e)
-    //{
-    //    var checkBox = sender as CheckBox;
-    //    var todo = checkBox?.BindingContext as TodoViewModel;
-    //    var data = checkBox?.IsChecked;
-    //    if (todo != null && data == false)
-    //    {
-    //        viewModel.OnChecked2(todo, data);
-    //    }
-    //}
-
-
-
     private async void OnFrameTapped(object sender, EventArgs e)
     {
-        //await DisplayAlert("Tapped", "You tapped the frame!", "OK");
         var frame = sender as Frame;
-
         var todo = frame?.BindingContext as TodoViewModel;
 
         if (todo != null && isVisible)
@@ -60,7 +40,11 @@ public partial class HomePage : ContentPage
         }
     }
 
-
+    private async void IsVisible()
+    {
+        await Task.Delay(1000);
+        isVisible = true;
+    }
 
     protected override void OnAppearing()
     {
@@ -70,27 +54,8 @@ public partial class HomePage : ContentPage
         BindingContext = viewModel;
     }
 
-
-
     public bool CheckDate(DateTime date)
     {
-        if (date < DateTime.Now)
-        {
-            return false;
-        }
-        return true;
+        return date >= DateTime.Now;
     }
-
-
-
-    //private async void OnDeleteClicked(object sender, EventArgs e)
-    //{
-    //    var button = sender as ImageButton;
-    //    var item = button.CommandParameter as TodoViewModel;
-
-    //    if (item != null)
-    //    {
-    //        await viewModel.DeleteTodo(item);
-    //    }
-    //}
 }

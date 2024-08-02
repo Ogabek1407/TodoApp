@@ -22,7 +22,6 @@ public partial class EditPage : ContentPage
         var isVisible = await viewModel.Save();
         if (isVisible)
         {
-            HomePage.isVisible = true;
             await Navigation.PopAsync();
         }
     }
